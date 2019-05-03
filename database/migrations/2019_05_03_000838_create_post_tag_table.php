@@ -14,8 +14,22 @@ class CreatePostTagTable extends Migration
     public function up()
     {
         Schema::create('post_tag', function (Blueprint $table) {
+            // (\:
             $table->bigIncrements('id');
+            $table->bigInteger('post_id')->unsigned(); // ]: Id de articulo
+            $table->bigInteger('tag_id')->unsigned(); // ]: Id de etiqueta
             $table->timestamps();
+
+            // \~> Relaciones
+            // ]: Llave foranea tabla usuarios
+            $table->foreign('post_id')->references('id')->on('posts')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            // ]: Llave foranea tabla categorias
+            $table->foreign('tag_id')->references('id')->on('tags')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            // ]>~
         });
     }
 

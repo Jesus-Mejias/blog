@@ -14,8 +14,12 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
+            // (\:
             $table->bigIncrements('id');
+            $table->string('name', 128); // ]: Nombre de articulo
+            $table->string('slug', 128)->unique(); // ]: Campo para URL amigable
             $table->timestamps();
+            // ]>~
         });
     }
 
