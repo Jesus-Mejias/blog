@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 use Illuminate\Database\Seeder;
 
 class PostsTableSeeder extends Seeder
@@ -11,6 +12,8 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // (|:
+        // ]: Ejecuta el factory
+        factory(Post::class, 300)->create();
     }
 }
