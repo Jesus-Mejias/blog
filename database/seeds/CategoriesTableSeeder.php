@@ -15,5 +15,6 @@ class CategoriesTableSeeder extends Seeder
         // (|:
         // ]: Ejecuta el factory
         factory(Category::class, 20)->create();
+        //]>~
     }
 }

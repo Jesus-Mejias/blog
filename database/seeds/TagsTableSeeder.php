@@ -15,5 +15,6 @@ class TagsTableSeeder extends Seeder
         // (|:
         // ]: Ejecuta el factory
         factory(Tag::class, 20)->create();
+        // ]>~
     }
 }

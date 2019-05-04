@@ -14,7 +14,7 @@ class CreatePostTagTable extends Migration
     public function up()
     {
         Schema::create('post_tag', function (Blueprint $table) {
-            // (\:
+            // (|:
             $table->bigIncrements('id');
             $table->bigInteger('post_id')->unsigned(); // ]: Id de articulo
             $table->bigInteger('tag_id')->unsigned(); // ]: Id de etiqueta
