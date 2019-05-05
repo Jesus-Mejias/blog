@@ -27,3 +27,9 @@ Route::get('categoria/{slug}', 'Web\PageController@category')->name('category');
 Route::get('etiqueta/{slug}', 'Web\PageController@tag')->name('tag'); 
 
 // |~> Administrador
+// ]: Ruta para el controlador de las tags
+Route::resource('tags', 'Admin\TagController');
+// ]: Ruta para el controlador de las categorias
+Route::resource('categories', 'Admin\CategoryController');
+// ]: Ruta para el controlador de los posts
+Route::resource('posts', 'Admin\PostController');
