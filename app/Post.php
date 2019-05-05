@@ -25,7 +25,7 @@ class Post extends Model
     }
 
     // |~> Relaciona un post con una categoria
-    public function user()
+    public function category()
     {
     	return $this->belongsTo(Category::class);
     }
