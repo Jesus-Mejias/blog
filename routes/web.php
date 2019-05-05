@@ -24,6 +24,6 @@ Route::get('entrada/{slug}', 'Web\PageController@post')->name('post');
 // ]: Ruta para la categoria 
 Route::get('categoria/{slug}', 'Web\PageController@category')->name('category');
 // ]: Ruta para la etiqueta 
-Route::get('etiqueta/{slug}', 'Web\PageController@ptag')->name('tag'); 
+Route::get('etiqueta/{slug}', 'Web\PageController@tag')->name('tag'); 
 
 // |~> Administrador
