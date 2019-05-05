@@ -6,24 +6,38 @@
 	
 	<div class="col col-md-8 mx-auto">
 
-		<h1>Lista de Articulos</h1>
+		<h1>{{ $post->name }}</h1>
 
-		@foreach($posts as $post)
-			<div class="card text-white bg-dark mb-3">
-				<div class="card-header">
-					<h2>{{ $post->name }}</h2>
-				</div>
-				@if($post->file)
-					<img src="{{ $post->file }}" alt="" class="car-img-top">
-				@endif
-				<div class="card-body">
-					{{ $post->excerp }}
-					<a href="#" class="pull-right">Leer más...</a>
-				</div>
+		
+		<div class="card text-white bg-dark mb-3">
+			<div class="card-header">
+				Categoria
+				<a href="#">{{$post->category->name}}</a>
 			</div>
-		@endforeach
 
-		{{ $posts->render() }}
+			@if($post->file)
+				<img src="{{ $post->file }}" alt="" class="car-img-top">
+			@endif
+
+			<div class="card-body">
+				{{ $post->excerp }}
+
+				<hr>
+
+				{!! $post->body !!}
+
+				<hr>
+
+				Etiquetas
+
+				@foreach($post->tags as $tag)
+				<a href="#">
+					{{ $tag->name }}
+				</a>
+				@endforeach
+			</div>
+		</div>
+
 	</div>
 
 </div>

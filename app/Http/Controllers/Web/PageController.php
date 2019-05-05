@@ -18,6 +18,16 @@ class PageController extends Controller
     		->where('status', 'PUBLISHED')
     		->paginate(3);
 
-    	return view('web.post', compact('posts'));
+    	return view('web.posts', compact('posts'));
+    }
+
+    // |~> Metodo para la vista del post
+    public function post($slug)
+    {
+    	
+    	// ]: Retorna el poste que se esta seleccionando
+    	$post = Post::where('slug', $slug)->first();
+
+    	return view('web.post', compact('post'));
     }
 }
