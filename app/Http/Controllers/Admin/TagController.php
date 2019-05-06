@@ -50,7 +50,12 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // ]: Guarda la etiqueta en la base de datos
+        $tag = Tag::create($request->all());
+
+        // ]: Redirecciona a la ruta de editar
+        return redirect()->route('tags.edit', $tag->id)
+            ->with('info', 'Etiqueta creada con exito');
     }
 
     /**
@@ -61,7 +66,10 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        // ]: Muestra en detalle una etiqueta
+        $tag = Tag::find($id);
+
+        return view('admin.tags.show', compact('tag'));
     }
 
     /**
@@ -72,7 +80,10 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        // ]: Busca la etiqueta que se va a editar
+        $tag = Tag::find($id);
+
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -84,7 +95,13 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // ]: Actualiza la etiqueta que se esta editando
+        tag = Tag::find($id);
+
+        $tag->fill($request->all())->save();
+
+        return redirect()->route('tags.edit', $tag->id)
+            ->with('info', 'Etiqueta actualizada con exito');
     }
 
     /**
@@ -95,6 +112,9 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // ]: Elimina una etiqueta
+        $tag = Tag::find($id)->delete();
+
+        return back()->with('info', 'Eliminado correctamente');
     }
 }
