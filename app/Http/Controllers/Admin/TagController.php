@@ -5,8 +5,19 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Tag;
+
 class TagController extends Controller
 {
+    /**
+    * |~> Metodo constructor que evalua
+    * la autenticacion del usuario.
+    */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        // ]: Retorna todas las etiquetas
+        $tags = Tag::orderBy('id', 'DESC')->paginate();
+
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**
@@ -24,7 +38,8 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        // ]: Retorna el formulario para crear etiquetas
+        return view('admin.tags.create');
     }
 
     /**
