@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TagStoreRequest extends FormRequest
+class CategoryStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class TagStoreRequest extends FormRequest
         return [
             // ]: Establece las reglas de validacion
             'name' => 'required',
-            'slug' => 'required|unique:tags,slug'
+            'slug' => 'required|unique:categories,slug'
         ];
     }
 }
