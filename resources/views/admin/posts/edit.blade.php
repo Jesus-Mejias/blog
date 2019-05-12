@@ -7,15 +7,15 @@
 			<div class="card bg-light mb-3">
 				
 				<div class="card-header">
-					Editar Categoria
+					Editar Entradas
 				</div>
 
 				<div class="card-body">
-					{!! Form::model($category, 
-						['route' => ['categories.update', $category->id],
+					{!! Form::model($post, 
+						['route' => ['posts.update', $post->id],
 						'method' => 'PUT']) !!}
 
-						@include('admin.categories.partials.form')
+						@include('admin.posts.partials.form')
 						
 					{!! Form::close() !!}
 				</div>

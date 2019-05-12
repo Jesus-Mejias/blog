@@ -7,8 +7,8 @@
 			<div class="card bg-light mb-3">
 				
 				<div class="card-header">
-					Lista de Categorias
-					<a href="{{ route('categories.create') }}" 
+					Lista de mis Entradas
+					<a href="{{ route('posts.create') }}" 
 					class="btn btn-sm btn-primary float-right">
 						Crear
 					</a>	
@@ -26,25 +26,25 @@
 						</thead>
 						
 						<tbody>
-							@foreach($categories as $category)
+							@foreach($posts as $post)
 							<tr>
-								<th scope="row">{{ $category->id }}</th>
-								<td>{{ $category->name }}</td>
+								<th scope="row">{{ $post->id }}</th>
+								<td>{{ $post->name }}</td>
 								<td width="10px">
-									<a href="{{ route('categories.show', $category->id )}}" 
+									<a href="{{ route('posts.show', $post->id )}}" 
 									class="btn btn-sm btn-secondary">
 										Ver
 									</a>
 								</td>
 								<td width="10px">
-									<a href="{{ route('categories.edit', $category->id )}}" 
+									<a href="{{ route('posts.edit', $post->id )}}" 
 									class="btn btn-sm btn-secondary">
 										Editar
 									</a>
 								</td>
 								<td width="10px">
 									{!! Form::open([
-										'route' => ['categories.destroy', $category->id],
+										'route' => ['posts.destroy', $post->id],
 										'method'=> 'DELETE'])
 									!!}
 
@@ -58,7 +58,7 @@
 							@endforeach
 						</tbody>
 					</table>
-					{{ $categories->render() }}
+					{{ $posts->render() }}
 				</div>
 
 			</div>

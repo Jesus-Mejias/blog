@@ -7,13 +7,13 @@
 			<div class="card bg-light mb-3">
 				
 				<div class="card-header">
-					Crear Categoria
+					Crear Entrada
 				</div>
 
 				<div class="card-body">
-					{!! Form::open(['route'=>'categories.store']) !!}
+					{!! Form::open(['route'=>'posts.store']) !!}
 
-						@include('admin.categories.partials.form')
+						@include('admin.posts.partials.form')
 						
 					{!! Form::close() !!}
 				</div>

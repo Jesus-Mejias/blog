@@ -7,13 +7,13 @@
 			<div class="card bg-light mb-3">
 				
 				<div class="card-header">
-					Ver Categoria
+					Ver Entada
 				</div>
 
 				<div class="card-body">
-					<p><strong>Nombre: </strong>{{ $category->name }}</p>
-					<p><strong>Slug: </strong>{{ $category->slug }}</p>
-					<p><strong>Contenido: </strong>{{ $category->body }}</p>
+					<p><strong>Nombre: </strong>{{ $post->name }}</p>
+					<p><strong>Slug: </strong>{{ $post->slug }}</p>
+					<p><strong>Contenido: </strong>{{ $post->body }}</p>
 				</div>
 
 			</div>
