@@ -8,6 +8,8 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Http\Controllers\Controller;
 
 use App\Post;
+use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -27,8 +29,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        // ]: Retorna todas las etiquetas
-        $posts = Post::orderBy('id', 'DESC')->paginate();
+        // ]: Retorna los post de cada autor
+        $posts = Post::orderBy('id', 'DESC')
+            ->where('user_id', auth()->user()->id)
+            ->paginate();
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -40,8 +44,16 @@ class PostController extends Controller
      */
     public function create()
     {
-        // ]: Retorna el formulario para crear etiquetas
-        return view('admin.posts.create');
+
+        // ]: Consulta las categorias
+        $categories = Category::orderBy('name', 'ASC')
+            ->pluck('name', 'id');
+
+        // ]: Consulta las etiquetas
+        $tags = Tag::orderBy('name', 'ASC')->get();
+
+        // ]: Retorna el formulario para crear posts
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -52,7 +64,7 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-        // ]: Guarda la etiqueta en la base de datos
+        // ]: Guarda el post en la base de datos
         $post = Post::create($request->all());
 
         // ]: Redirecciona a la ruta de editar
@@ -68,7 +80,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        // ]: Muestra en detalle una etiqueta
+        // ]: Muestra en detalle un post
         $post = Post::find($id);
 
         return view('admin.posts.show', compact('post'));
@@ -82,10 +94,18 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        // ]: Busca la etiqueta que se va a editar
+
+        // ]: Consulta las categorias
+        $categories = Category::orderBy('name', 'ASC')
+            ->pluck('name', 'id');
+
+        // ]: Consulta las etiquetas
+        $tags = Tag::orderBy('name', 'ASC')->get();
+
+        // ]: Busca el post que se va a editar
         $post = Post::find($id);
 
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -97,7 +117,7 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, $id)
     {
-        // ]: Actualiza la etiqueta que se esta editando
+        // ]: Actualiza el post que se esta editando
         $post = Post::find($id);
 
         $post->fill($request->all())->save();
@@ -114,7 +134,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        // ]: Elimina una etiqueta
+        // ]: Elimina un post
         $post = Post::find($id)->delete();
 
         return back()->with('info', 'Eliminado correctamente');
