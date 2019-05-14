@@ -84,12 +84,12 @@ class PostController extends Controller
         }
 
         // ]: Relaciona el post con las etiquetas
-        $post->tag()->attach($request->get('tags'));
+        $post->tags()->attach($request->get('tags'));
 
         // ]: Redirecciona a la ruta de editar
         return redirect()->route('posts.edit', $post->id)
             ->with('info', 'Entrada creada con exito');
-    }
+    } 
 
     /**
      * Display the specified resource.
@@ -153,7 +153,7 @@ class PostController extends Controller
         }
 
         // ]: Relaciona el post con las etiquetas
-        $post->tag()->sync($request->get('tags'));
+        $post->tags()->sync($request->get('tags'));
 
         return redirect()->route('posts.edit', $post->id)
             ->with('info', 'Entrada actualizada con exito');

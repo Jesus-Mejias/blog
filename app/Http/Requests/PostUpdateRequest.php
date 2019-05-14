@@ -27,12 +27,12 @@ class PostUpdateRequest extends FormRequest
         // ]: Establece las reglas de validacion
         $rules = [
             'name'          => 'required',
-            'slug'          => 'required|unique:posts,slug', . $this->post,
+            'slug'          => 'required|unique:posts,slug,' . $this->post,
             'user_id'       => 'required|integer',
             'category_id'   => 'required|integer',
             'tags'          => 'required|array',
             'body'          => 'required',
-            'status'        => 'required|in:DRAFT, PUBLISHIED',
+            'status'        => 'required|in:DRAFT,PUBLISHED',
         ];
 
         // ]: Valida si se ha enviado una imagen en el formulario

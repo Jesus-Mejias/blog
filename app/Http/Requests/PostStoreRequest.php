@@ -32,7 +32,7 @@ class PostStoreRequest extends FormRequest
             'category_id'   => 'required|integer',
             'tags'          => 'required|array',
             'body'          => 'required',
-            'status'        => 'required|in:DRAFT, PUBLISHIED',
+            'status'        => 'required|in:DRAFT,PUBLISHED', 
         ];
 
         // ]: Valida si se ha enviado una imagen en el formulario
