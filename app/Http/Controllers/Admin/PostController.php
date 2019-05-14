@@ -101,6 +101,8 @@ class PostController extends Controller
     {
         // ]: Muestra en detalle un post
         $post = Post::find($id);
+        // ]: Valida que el post pertenezca al usuario
+        $this->authorize('pass', $post);
 
         return view('admin.posts.show', compact('post'));
     }
@@ -113,6 +115,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        // ]: Busca el post que se va a editar
+        $post = Post::find($id);
+        // ]: Valida que el post pertenezca al usuario
+        $this->authorize('pass', $post);
 
         // ]: Consulta las categorias
         $categories = Category::orderBy('name', 'ASC')
@@ -120,9 +126,6 @@ class PostController extends Controller
 
         // ]: Consulta las etiquetas
         $tags = Tag::orderBy('name', 'ASC')->get();
-
-        // ]: Busca el post que se va a editar
-        $post = Post::find($id);
 
         return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
@@ -138,6 +141,8 @@ class PostController extends Controller
     {
         // ]: Actualiza el post que se esta editando
         $post = Post::find($id);
+        // ]: Valida que el post pertenezca al usuario
+        $this->authorize('pass', $post);
 
         // ]: Actualiza los cambios
         $post->fill($request->all())->save();
@@ -167,8 +172,13 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        // ]: Elimina un post
-        $post = Post::find($id)->delete();
+        // ]: Busca el Post para eliminarlo
+        $post = Post::find($id);
+        // ]: Valida que el post pertenezca al usuario
+        $this->authorize('pass', $post);
+
+        // ]: Elimina el post
+        $post->delete();
 
         return back()->with('info', 'Eliminado correctamente');
     }
