@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\PostStoreRequest;
-use App\Http\Requests\PostUpdateRequest;
 use App\Http\Controllers\Controller;
 
+// ]: Clases para validaciones
+use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostUpdateRequest;
+
+// ]: Clase parael guardado de archivos
+use Illuminate\Support\Facades\Storage;
+
+// ]: Clases de los modelos a utilizar
 use App\Post;
 use App\Category;
 use App\Tag;
@@ -67,6 +73,19 @@ class PostController extends Controller
         // ]: Guarda el post en la base de datos
         $post = Post::create($request->all());
 
+        // |~> Seccion para guardar imagen
+        // ]: Valida si se ha enviado un archivo
+        if ($request->file('file')) {
+            
+            // ]: Establece la ruta para guardar el archivo
+            $path = Storage::disk('public')->put('image', $request->file('file'));
+            // ]: Actualiza el post
+            $post->fill(['file' => asset($path)])->save();
+        }
+
+        // ]: Relaciona el post con las etiquetas
+        $post->tag()->attach($request->get('tags'));
+
         // ]: Redirecciona a la ruta de editar
         return redirect()->route('posts.edit', $post->id)
             ->with('info', 'Entrada creada con exito');
@@ -120,7 +139,21 @@ class PostController extends Controller
         // ]: Actualiza el post que se esta editando
         $post = Post::find($id);
 
+        // ]: Actualiza los cambios
         $post->fill($request->all())->save();
+
+          // |~> Seccion para guardar imagen
+        // ]: Valida si se ha enviado un archivo
+        if ($request->file('file')) {
+            
+            // ]: Establece la ruta para guardar el archivo
+            $path = Storage::disk('public')->put('image', $request->file('file'));
+            // ]: Actualiza el post
+            $post->fill(['file' => asset($path)])->save();
+        }
+
+        // ]: Relaciona el post con las etiquetas
+        $post->tag()->sync($request->get('tags'));
 
         return redirect()->route('posts.edit', $post->id)
             ->with('info', 'Entrada actualizada con exito');
